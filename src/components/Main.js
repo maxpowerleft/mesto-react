@@ -32,7 +32,7 @@ function Main(props) {
           return {
             id: item._id,
             link: item.link,
-            title: item.title,
+            name: item.name,
             likes: item.likes.length
           }
         })
