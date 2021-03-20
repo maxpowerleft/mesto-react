@@ -4,7 +4,6 @@ import Main from './components/Main.js';
 import Footer from './components/Footer.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import ImagePopup from './components/ImagePopup.js';
-import './App.css';
 
 
 function App() {
