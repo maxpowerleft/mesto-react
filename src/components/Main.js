@@ -1,5 +1,4 @@
 import React from 'react';
-// import avatarLoadingGif from '../images/Avatar.gif';
 import editImage from '../images/edit-image.svg';
 import addImage from '../images/add-image.svg';
 import api from '../utils/api.js';
@@ -77,8 +76,8 @@ function Main(props) {
         </button>
       </section>
       <section className="elements">
-        {cards.map(item => (
-          <Card key={item.id} {...item} />
+        {cards.map(card => (
+          <Card key={card.id} card={card} onCardClick={props.onCardClick} />
         )
         )}
       </section>
