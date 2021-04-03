@@ -4,9 +4,12 @@ import Main from './Main.js';
 import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
+import api from '../utils/api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
@@ -37,7 +40,18 @@ function App() {
     setSelectedCard({ link: '', name: '' })
   }
 
+  React.useEffect(() => {
+    api.getUserData()
+      .then(res => {
+        setCurrentUser(res)
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }, []);
+
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <>
         <Header />
@@ -74,7 +88,8 @@ function App() {
         <PopupWithForm onClose={closeAllPopups} name="delete" title="Вы уверены?" buttonText="Да" />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </>
-    </div>
+      </div>
+      </CurrentUserContext.Provider>
   );
 }
 
