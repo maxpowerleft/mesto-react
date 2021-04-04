@@ -62,14 +62,6 @@ class Api {
       .then(this._getResponse);
   }
 
-  putLike(cardID) {
-    return fetch(`${this._url}/cards/likes/${cardID}`, {
-      method: 'PUT',
-      headers: this._headers,
-    })
-      .then(this._getResponse);
-  }
-
   deleteCard(cardID) {
     return fetch(`${this._url}/cards/${cardID}`, {
         method: 'DELETE',
@@ -78,11 +70,11 @@ class Api {
       .then(this._getResponse);
   }
 
-  deleteLike(cardID) {
-    return fetch(`${this._url}/cards/likes/${cardID}`, {
-        method: 'DELETE',
-        headers: this._headers
-      })
+  changeLikeCardStatus(id, isLiked) {
+    return fetch(`${this._url}/cards/likes/${id}`, {
+      method: isLiked ? 'PUT' : 'DELETE',
+      headers: this._headers,
+    })
       .then(this._getResponse);
   }
 }
