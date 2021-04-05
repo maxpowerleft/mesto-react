@@ -5,6 +5,7 @@ import Footer from './Footer.js';
 import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
@@ -44,6 +45,17 @@ function App() {
       })
   }
 
+  const handleUpdateAvatar = (data) => {
+    api.patchUserAvatar(data)
+      .then((res) => {
+        setCurrentUser(res)
+        closeAllPopups()
+      })
+    .catch((err) => {
+        console.error(err);
+      })
+  }
+  
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
@@ -90,14 +102,15 @@ function App() {
             <input id="card-src-input" type="url" className="popup__input popup__text popup__card-src" name="link" placeholder="Ссылка на фото/картинку" required />
             <span id="card-src-input-error" className="popup__input-error" />
           </>
-        </PopupWithForm>
-
-        <PopupWithForm onClose={closeAllPopups} isOpen={isEditAvatarPopupOpen} name="avatar" title="Обновить аватар" buttonText="Сохранить">
+          </PopupWithForm>
+          
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+        {/* <PopupWithForm onClose={closeAllPopups} isOpen={isEditAvatarPopupOpen} name="avatar" title="Обновить аватар" buttonText="Сохранить">
           <>
             <input id="avatar-src-input" type="url" className="popup__input popup__text popup__avatar-src" name="link" placeholder="Ссылка на Ваш новый аватар" required />
             <span id="avatar-src-input-error" className="popup__input-error" />
           </>
-        </PopupWithForm>
+        </PopupWithForm> */}
         <PopupWithForm onClose={closeAllPopups} name="delete" title="Вы уверены?" buttonText="Да" />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </>
