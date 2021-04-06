@@ -4,7 +4,7 @@ import logo from '../images/header-logo.svg';
 function Header() {
   return (
     <header className="header">
-    <img src={logo} alt="Логотип сервиса 'Место'" className="header__logo" />
+      <img src={logo} alt="Логотип сервиса 'Место'" className="header__logo" />
     </header>
   )
 }
