@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.profile__edit-button-avatar:hover {
+  background: url(../../../images/edit-image.svg) center no-repeat rgba(0, 0, 0, .4);
+}
+
 @media screen and (max-width: 639px) {
   .profile__edit-button-avatar {
     margin-left: -10px;
