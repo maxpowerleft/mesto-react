@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
-// import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
@@ -94,7 +93,10 @@ function handleCardLike(card) {
       .then((res) => {
         setCards([res, ...cards]);
         closeAllPopups()
-    })
+      })
+    .catch(err => {
+        console.error(err)
+      })
   }
 
   const closeAllPopups = () => {
@@ -117,25 +119,22 @@ function handleCardLike(card) {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <>
-          <Header />
-          <Main
-            onCardClick={handleCardClick}
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardDelete={handleCardDelete}
-            onCardLike={handleCardLike}
-            cards={cards} />
-          <Footer />
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
-          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-        {/* <PopupWithForm onClose={closeAllPopups} name="delete" title="Вы уверены?" buttonText="Да" /> */}
+        <Header />
+        <Main
+          onCardClick={handleCardClick}
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onCardDelete={handleCardDelete}
+          onCardLike={handleCardLike}
+          cards={cards} />
+        <Footer />
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-      </>
       </div>
-      </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 
